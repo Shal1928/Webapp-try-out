@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Tutorial: Hello Dojo!</title>
-    </head>
-    <body>
-        <h1 id="greeting">Hi</h1>
+<head>
+    <meta charset="utf-8">
+    <title>Demo: Application Config</title>
+    <link rel="stylesheet" href="../../_common/demo.css" media="screen" type="text/css">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css" media="screen">
+    <style>
+        #dialog { min-width: 200px; }
+    </style>
+</head>
+    <body class="claro">
+        <h1>Demo: Application Config</h1>
 
         <!-- Configure Dojo first -->
         <script>
-            var dojoConfig = {
+            dojoConfig = {
                 has: {
-                    "dojo-firebug": true,
-                    "dojo-debug-messages": true
+                    "dojo-firebug": true
                 },
-                parseOnLoad: true,
-                // look for a locale=xx query string param, else default to 'en-us'
-                locale: location.search.match(/locale=([\w\-]+)/) ? RegExp.$1 : "en-us"
+                app: {
+                    userName: "Anonymous"
+                }
             };
         </script>
         <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
 
         <script>
-            require(["dojo/date/locale", "dijit/Dialog", "dojo/json", "dojo/_base/config",
-                        "dojo/_base/window", "dojo/i18n", "dojo/domReady!"]
-                    , function(locale, Dialog, JSON, config, win) {
-                        var now = new Date();
-                        var dialog = new Dialog({
-                            id: "dialog",
-                            // set a title on the dialog of today's date,
-                            // using a localized date format
-                            title: "Today: " + locale.format(now, {
-                                formatLength:"full",
-                                selector:"date"
-                            })
-                        }).placeAt(win.body());
-                        dialog.startup();
+            require(["dijit/Dialog", "dijit/registry", "dojo/parser", "dojo/_base/lang",
+                        "dojo/json", "dojo/_base/config", "dojo/io-query", "dojo/domReady!"]
+                    , function(Dialog, registry, parser, lang, JSON, config, ioQuery) {
 
-                        dialog.set("content", "<pre>" + JSON.stringify(config, null, "\t") + "```");
+                        // pull configuration from the query string
+                        // and mix it into our app config
+                        var queryParams = ioQuery.queryToObject(location.search.substring(1));
+                        lang.mixin(config.app, queryParams);
+
+                        // Create a dialog
+                        var dialog = new Dialog({
+                            title: "Welcome back " + config.app.userName,
+                            content: "<pre>" + JSON.stringify(config, null, "\t") + "```"
+                        });
+
+                        // Draw on the app config to put up a personalized message
                         dialog.show();
+
                     });
         </script>
     </body>
