@@ -1,0 +1,13 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure class="org.eclipse.jetty.maven.plugin.JettyWebAppContext">
+    <!--<Get name="securityHandler">-->
+        <!--<Set name="loginService">-->
+            <!--<New class="org.eclipse.jetty.jaas.JAASLoginService">-->
+                <!--<Set name="Name">default</Set>-->
+                <!--<Set name="LoginModuleName">Test</Set>-->
+            <!--</New>-->
+        <!--</Set>-->
+    <!--</Get>-->
+</Configure>
