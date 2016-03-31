@@ -7,44 +7,39 @@
     <body>
         <h1 id="greeting">Hi</h1>
 
-        <!-- configure Dojo -->
+        <!-- set Dojo configuration, load Dojo -->
         <script>
-            // Instead of using data-dojo-config, we're creating a dojoConfig
-            // object *before* we load dojo.js; they're functionally identical,
-            // it's just easier to read this approach with a larger configuration.
-            var dojoConfig = {
-                async: true,
-                baseUrl: '.',
-                packages: [
-                    'dojo',
-                    'dijit',
-                    'dojox',
-                    'demo'
-                ]
+            dojoConfig= {
+                has: {
+                    "dojo-firebug": true
+                },
+                parseOnLoad: false,
+                foo: "bar",
+                async: true
             };
-
         </script>
-
-        <!-- load Dojo -->
-        <script src="dojo/dojo.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
 
         <script>
-            require([
-                'dojo/dom',
-                'dojo/fx',
-                'dojo/domReady!'
-            ], function (dom, fx) {
-                // The piece we had before...
-                var greeting = dom.byId('greeting');
-                greeting.innerHTML += ' from Dojo!';
-
-                // ...but now, with an animation!
-                fx.slideTo({
-                    node: greeting,
-                    top: 100,
-                    left: 200
-                }).play();
-            });
+            // Require the registry, parser, Dialog, and wait for domReady
+            require(["dijit/registry",
+                     "dojo/parser",
+                     "dojo/json",
+                     "dojo/_base/config",
+                     "dijit/Dialog",
+                     "dojo/domReady!"],
+                    function(registry, parser, JSON, config) {
+                        // Explicitly parse the page
+                        parser.parse();
+                        // Find the dialog
+                        var dialog = registry.byId("dialog");
+                        // Set the content equal to what dojo.config is
+                        dialog.set("content", "<pre>" + JSON.stringify(config, null, "\t") + "```");
+                        // Show the dialog
+                        dialog.show();
+                    });
         </script>
+
+        <div id="dialog" data-dojo-type="dijit/Dialog" data-dojo-props="title: 'dojoConfig / dojo/_base/config'"></div>
     </body>
 </html>
