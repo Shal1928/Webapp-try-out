@@ -7,39 +7,39 @@
     <body>
         <h1 id="greeting">Hi</h1>
 
-        <!-- set Dojo configuration, load Dojo -->
+        <!-- Configure Dojo first -->
         <script>
-            dojoConfig= {
+            var dojoConfig = {
                 has: {
-                    "dojo-firebug": true
+                    "dojo-firebug": true,
+                    "dojo-debug-messages": true
                 },
-                parseOnLoad: false,
-                foo: "bar",
-                async: true
+                parseOnLoad: true,
+                // look for a locale=xx query string param, else default to 'en-us'
+                locale: location.search.match(/locale=([\w\-]+)/) ? RegExp.$1 : "en-us"
             };
         </script>
         <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
 
         <script>
-            // Require the registry, parser, Dialog, and wait for domReady
-            require(["dijit/registry",
-                     "dojo/parser",
-                     "dojo/json",
-                     "dojo/_base/config",
-                     "dijit/Dialog",
-                     "dojo/domReady!"],
-                    function(registry, parser, JSON, config) {
-                        // Explicitly parse the page
-                        parser.parse();
-                        // Find the dialog
-                        var dialog = registry.byId("dialog");
-                        // Set the content equal to what dojo.config is
+            require(["dojo/date/locale", "dijit/Dialog", "dojo/json", "dojo/_base/config",
+                        "dojo/_base/window", "dojo/i18n", "dojo/domReady!"]
+                    , function(locale, Dialog, JSON, config, win) {
+                        var now = new Date();
+                        var dialog = new Dialog({
+                            id: "dialog",
+                            // set a title on the dialog of today's date,
+                            // using a localized date format
+                            title: "Today: " + locale.format(now, {
+                                formatLength:"full",
+                                selector:"date"
+                            })
+                        }).placeAt(win.body());
+                        dialog.startup();
+
                         dialog.set("content", "<pre>" + JSON.stringify(config, null, "\t") + "```");
-                        // Show the dialog
                         dialog.show();
                     });
         </script>
-
-        <div id="dialog" data-dojo-type="dijit/Dialog" data-dojo-props="title: 'dojoConfig / dojo/_base/config'"></div>
     </body>
 </html>
