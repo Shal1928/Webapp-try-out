@@ -14,18 +14,19 @@
             // it's just easier to read this approach with a larger configuration.
             var dojoConfig = {
                 async: true,
-                // This code registers the correct location of the "demo"
-                // package so we can load Dojo from the CDN whilst still
-                // being able to load local modules
-                packages: [{
-                    name: "demo",
-                    location: location.pathname.replace(/\/[^/]*$/, '') + '/demo'
-                }]
+                baseUrl: '.',
+                packages: [
+                    'dojo',
+                    'dijit',
+                    'dojox',
+                    'demo'
+                ]
             };
+
         </script>
 
         <!-- load Dojo -->
-        <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
+        <script src="dojo/dojo.js"></script>
 
         <script>
             require([
