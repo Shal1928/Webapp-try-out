@@ -3,9 +3,52 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <display-name>webapp-try-out for DoJo</display-name>
+    <display-name>FN test by DoJo</display-name>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+
+    <servlet-mapping>
+        <servlet-name>AuthFilenet</servlet-name>
+        <url-pattern>/fntestdojo/AuthFilenet</url-pattern>
+    </servlet-mapping>
+
+    <!--filters-->
+    <filter>
+        <filter-name>SessionFilter</filter-name>
+        <filter-class>ru.lb.fntestdojo.server.SessionFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SessionFilter</filter-name>
+        <servlet-name>AuthFilenet</servlet-name>
+    </filter-mapping>
+
+
+    <!--Security-->
+    <security-role>
+        <description>All authenticated</description>
+        <role-name>All</role-name>
+    </security-role>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>All</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>All</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>default</realm-name>
+        <form-login-config>
+            <form-login-page>/security/login.jsp</form-login-page>
+            <form-error-page>/index.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
 </web-app>

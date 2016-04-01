@@ -1,0 +1,16 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+    <g:PopupPanel autoHideOnHistoryEventsEnabled="true" autoHideEnabled="true" animationEnabled="true">
+            <g:VerticalPanel>
+                <g:HTML>Ваши ответы приняты на проверку!<br />
+                    Ваш результат равен: <span ui:field="numCorrectAnswers"/> правильных ответов из <span ui:field="numOfQuestions" /> <br />
+                    или <span ui:field="percentOfCorrectAnswers" />%!
+                </g:HTML>
+                <g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT">
+                    <g:Button ui:field="closeResultButton">Close</g:Button>
+                </g:HorizontalPanel>
+                <g:HTML ui:field="serverResponse"/>
+            </g:VerticalPanel>
+    </g:PopupPanel>
+</ui:UiBinder>

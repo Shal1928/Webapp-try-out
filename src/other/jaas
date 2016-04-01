@@ -1,0 +1,3 @@
+Test {
+   ru.lb.fntestdojo.server.LoginJAAS required;
+};

@@ -1,0 +1,13 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+    <g:VerticalPanel>
+        <g:HTML>IBM Filenet Tests</g:HTML>
+        <g:HTML><br/><b>Выберите тест из списка:</b></g:HTML>
+        <g:VerticalPanel ui:field="vPanelTests" />
+        <g:VerticalPanel ui:field="vPanelRight" width="100%" horizontalAlignment="ALIGN_RIGHT">
+            <g:Button ui:field="exitButton">Exit</g:Button>
+        </g:VerticalPanel>
+    </g:VerticalPanel>
+</ui:UiBinder>
