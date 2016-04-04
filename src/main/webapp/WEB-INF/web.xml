@@ -3,26 +3,36 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <display-name>webapp-try-out for DoJo</display-name>
-
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
-
-    <servlet>
-        <servlet-name>jersey-serlvet</servlet-name>
-        <servlet-class>
-            com.sun.jersey.spi.container.servlet.ServletContainer
-        </servlet-class>
-        <init-param>
-            <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>ru.shal1928.tryout.webapp.server.services.impl</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>jersey-serlvet</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
-    </servlet-mapping>
+    <!--<security-constraint>-->
+        <!--<display-name>TestConstraint</display-name>-->
+        <!--<web-resource-collection>-->
+            <!--<web-resource-name>TestResource</web-resource-name>-->
+            <!--<description/>-->
+            <!--<url-pattern>/*</url-pattern>-->
+        <!--</web-resource-collection>-->
+        <!--<auth-constraint>-->
+            <!--<description/>-->
+            <!--<role-name>User</role-name>-->
+            <!--<role-name>Admin</role-name>-->
+        <!--</auth-constraint>-->
+    <!--</security-constraint>-->
+    <!--<login-config>-->
+        <!--<auth-method>FORM</auth-method>-->
+        <!--<realm-name>testRealm</realm-name>-->
+        <!--<form-login-config>-->
+            <!--<form-login-page>/security/login.jsp</form-login-page>-->
+            <!--<form-error-page>/security/error.jsp</form-error-page>-->
+        <!--</form-login-config>-->
+    <!--</login-config>-->
+    <!--<security-role>-->
+        <!--<description/>-->
+        <!--<role-name>User</role-name>-->
+    <!--</security-role>-->
+    <!--<security-role>-->
+        <!--<description/>-->
+        <!--<role-name>Admin</role-name>-->
+    <!--</security-role>-->
 </web-app>
